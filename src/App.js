@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Footer } from "./MyComponents/Footer";
 import Header from "./MyComponents/Header";
 import { Todos } from "./MyComponents/Todos";
 
 function App() {
-  let todos = [
+  let data = [
     {
       sno: 1,
       title: "mareket",
@@ -25,10 +26,18 @@ function App() {
       desc: "go tv",
     },
   ];
+  const [todos, setTodos] = useState(data);
+
+  const deleteTodo = (id) => {
+    console.log(id);
+    let arr = todos.filter((single) => single.sno !== id);
+    setTodos(arr);
+  };
+
   return (
     <>
       <Header title="My To Do List" searchBar={false} />
-      <Todos todos={todos} />
+      <Todos todos={todos} deleteTodo={deleteTodo} />
       <Footer />
     </>
   );
